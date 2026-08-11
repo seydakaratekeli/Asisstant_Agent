@@ -4,7 +4,7 @@ Bu proje, gelen kutunuzdaki e-postaları her sabah otomatik olarak analiz eden, 
 
 ---
 
-<img width="1918" height="821" alt="image" src="https://github.com/user-attachments/assets/c1e6eb4f-9716-42bd-b9b3-55ef6f7a6033" />
+<img width="1727" height="792" alt="image" src="https://github.com/user-attachments/assets/f81c0867-6593-48ba-9ddf-c43afcce7656" />
 
 
 
