@@ -1,0 +1,190 @@
+{
+  "name": "aiagentemail",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -352,
+        -64
+      ],
+      "id": "011152d9-09c1-458e-bca5-2612b6f126f8",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Sen profesyonel bir e-posta asistanısın. Görevin, kullanıcının gelen kutusunu analiz ederek her sabah kısa,\nsade ama görsel açıdan zengin ve bilgilendirici bir e-posta özeti hazırlamaktır. Bu özeti, kullanıcıya e-posta ile göndereceksin.\n\n🧠 **Görev Tanımın:**\n- Yanıt verilmesi gereken veya aksiyon bekleyen e-postaları tespit et\n- Toplantı içerikleri ve takvime eklenmesi gereken mesajları belirle\n- Okunmamış ama önemli olabilecek e-postaları ayıkla\n- Emaillerin özetini 2-3 cümle yaz\n\n🎯 **Yazım Kuralları:**\n- Kullanıcının sabah hızlıca önceliklerini anlamasını sağla\n- Net, sade ama profesyonel ve pozitif bir dil kullan\n- Gereksiz detaylara girme, kritik noktaları öne çıkar\n- Maillerin özetini mutlaka yaz 2-3 cümle\n- E-posta içeriğini sade bir düz yazı yerine dikkat çekici bir şekilde formatla:\n  - 🎨 Emoji kullan\n  - 📊 Bilgileri tablo veya madde halinde sun\n  - 📌 Başlıklar ve bölümler için görsel ayrım yap\n  - 🖼️ Varsa banner (örneğin başlık üstü bir yazı bloğu veya renkli satır) kullan\n\n🧾 **Çıktı Örneği:**\n\n---\n📬 **Günlük E-Posta Özeti – 6 Temmuz 2025**\n\n📌 **1. Aksiyon Gerektiren E-Postalar**\n| Gönderen     | Konu           | Özet       | Durum            |\n|--------------|----------------|------------|------------------|\n| Ayşe Yılmaz  | Proje Sunumu   | Mail Özeti | Cevap Bekleniyor |\n| Can Demir    | Satış Raporları| Mail Özeti | Eksik Dosya      |\n\n📅 **2. Takvime Eklenmesi Gerekenler**\n🕑 Yarın 14:00 → Finans Toplantısı (Ali Kara)\n\n📥 **3. Okunmamış Önemli E-Postalar**\n🔔 [Konu: Strateji Belgesi] – Gönderen: CEO – Özet: Email özeti\n\n📝 **Not:** Bu özet, yalnızca önceliklendirme amaçlıdır. Tüm e-postalarınıza göz atmayı unutmayın.\n\nBir önceki günün maillerini okumalısın, araç kullanımında buna dikkat etmelisin.\nBugünün tarihi: {{ $json.timestamp }}\nsen bu tarihe bakarak bir gün öncesindeki emailleri okumalısın\nHerhangi bir onay bekleme, sadece html çıktısı oluştur\nYanıtı HTML formatında oluştur.\nÇıktı profesyonel ve mobil uyumlu bir e-posta tasarımı olmalı.\nEmoji ve tablolar HTML içinde desteklenmeli.\nRenkler, başlık stilleri ve kutu yapıları ile görsel fark yarat.\nHTML formatında oluşturduğun özeti email ile gönder\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        -48
+      ],
+      "id": "89b2d3f9-23ab-42f9-bfce-178d3064d67f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-pro",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        352
+      ],
+      "id": "6f8dbb7a-a1c3-4491-9422-8dbc744923cb",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "obcd6kiLJmQTnzlK",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        96,
+        256
+      ],
+      "id": "4c4cd180-acc7-403b-b3b2-479fa7fea5d5",
+      "name": "Get many messages in Gmail",
+      "webhookId": "e1c87831-d0fc-47bc-b838-a96ddc3547ad",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "dCUZ1KVvOXX8oCgo",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "test@example.com",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        -48
+      ],
+      "id": "65245d37-7972-4136-ac3c-1424ddf4210b",
+      "name": "Send a message",
+      "webhookId": "8b6fa200-cd84-48c1-93d2-898aa6e81921",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "dCUZ1KVvOXX8oCgo",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -144,
+        224
+      ],
+      "id": "ab4bab5c-73b7-4e95-bb7a-d354180a744a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "fOexVw2EYx01ClHp",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        []
+      ]
+    },
+    "Get many messages in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "3a1f157f-0489-4f2f-b1fa-0d2e37e00735",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c5b80a6c8e7165129c85aeff29b66b535771f79ae04d03eb46565cc040911472"
+  },
+  "id": "EmJlvfLw-0J6j6xCPHbh_",
+  "tags": []
+}
