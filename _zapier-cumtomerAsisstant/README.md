@@ -5,6 +5,13 @@
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-Database-34A853?style=for-the-badge&logo=googlesheets&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)
 
+
+<img width="1917" height="866" alt="image" src="https://github.com/user-attachments/assets/bad228c1-95d4-4e83-9dac-bd7ab23db08e" />
+
+
+<img width="1354" height="541" alt="image" src="https://github.com/user-attachments/assets/40b63c58-f062-444f-aa7d-e93aa45184e8" />
+
+
 **Asisstant_Agent**, müşteri taleplerini otomatize etmek, veri analizlerini anlık olarak gerçekleştirmek ve sonuçları veritabanı/tablo sistemlerine aktarmak için geliştirilmiş yapay zekâ destekli bir otomasyon asistanıdır.
 
 Bu proje; **Zapier**, **LLM (OpenAI/ChatGPT)** ve **Google Sheets** entegrasyonlarını kullanarak gelen verileri kategorize eder, analiz eder ve ilgili tablolara otomatik olarak işler.
